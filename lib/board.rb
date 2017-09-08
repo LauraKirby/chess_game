@@ -1,4 +1,3 @@
-# require 'square'
 require 'csv'
 
 class Board
@@ -30,8 +29,9 @@ class Board
     end
 
     positions.each do |piece|
-      @pieces.push(Piece.new(piece[0], piece[1], piece[2]))
+      @pieces.push( Piece.new(piece[0], piece[1], piece[2]) )
     end
+
     place_pieces(@pieces)
   end
 
@@ -40,14 +40,12 @@ class Board
   def place_pieces(pieces)
     return [] if pieces.nil?
     pieces.each do |piece|
-      # find location on board and update square
       count = 0
       for i in 0..63
         if piece.current_position == @squares[i].coordinates
           @squares[i].piece = piece
           count += 1
         elsif count > pieces.length
-          puts "for loop count: #{i}"
           break pieces
         end
       end
