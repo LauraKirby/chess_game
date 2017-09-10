@@ -10,7 +10,7 @@ class Board
 
   def create_board
     new_board = []
-    (1..8).each do | row |
+    [*8.downto(1)].each do | row |
       (1..8).each do | column |
         new_board.push(Square.new(row, column))
       end

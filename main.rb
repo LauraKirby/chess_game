@@ -29,9 +29,8 @@ board = Board.new(pieces)
 
 board.print_board
 
-black_pawn = board.squares[26].piece
-puts "\n \n black_pawn: #{black_pawn.current_position}"
-# coord [3, 4]
+black_pawn = board.squares[34].piece
+puts "\n \npiece: #{black_pawn.piece_name}, #{black_pawn.current_position}"
 
 black_pawn.move("c3")
-puts "\n after move, black_pawn: #{black_pawn.current_position}\n"
+puts "\nafter move - \npiece:  #{black_pawn.piece_name}, #{black_pawn.current_position}\n"
