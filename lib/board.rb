@@ -63,5 +63,56 @@ class Board
     end
   end
 
+  def move(starting_location, ending_location)
+    piece = nil
+    start = parse_position(starting_location)
+
+    @squares.each do |square|
+      if !square.piece.nil? && square.piece.current_position == start
+        piece = square.piece
+      end
+    end
+
+    return 0 if piece == nil
+
+    difference = find_distance(piece, ending_location)
+    # black pawn
+    # forward
+    if difference == [0, 1]
+      set_location(piece, difference)
+    # diagonal right
+    elsif difference == [-1, 1]
+      set_location(piece, difference)
+    # diagonal right
+    elsif difference == [1, 1]
+      set_location(piece, difference)
+    else
+      puts "invalid move"
+      return 0
+    end
+  end
+
+  private
+
+  def parse_position(pos)
+    position = pos.split("")
+    @row = position[1].to_i
+    @column = position[0].ord - 96
+    [@column, @row]
+  end
+
+  def find_distance(piece, new_location)
+    starting_location = piece.current_position
+    ending_location = parse_position(new_location)
+    distance = [( starting_location[0] - ending_location[0] ), ( starting_location[1] - ending_location[1] )]
+    distance
+  end
+
+  def set_location(piece, difference)
+    starting_location = piece.current_position
+    new_location = [ ( starting_location[0] - difference[0] ), ( starting_location[1] - difference[1] )]
+    piece.current_position = new_location
+  end
+
 end
 
