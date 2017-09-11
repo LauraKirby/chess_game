@@ -26,3 +26,7 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - 'Piece' could inherit from 'Square'
 - Re-factor method for placing pieces now that calculation for coordinates exists
 - update tests to test private methods
+
+# Results
+- Running the program and tests should result in the following:
+<img width="885" alt="print_chess_game" src="https://user-images.githubusercontent.com/7623147/30262294-3a178380-9685-11e7-8743-1962d13f53b4.png">
