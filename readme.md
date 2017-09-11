@@ -12,6 +12,9 @@ and then allows the players to legally move their pieces. You are only implement
 Please don’t spend more than a couple hours on this. If there are features or edge cases that you don’t have time to include, take note of them, and we can discuss how you would tackle them afterward. Let me know if you have any questions.
 
 
+# Approach
+- Given the time constraints, I aimed to make problem (listed above) smaller by first solving for the "black pawn" located at "c4". While solving for the "black pawn" first, moved quickly with well tested code. As I begin working on other pieces, I will aim to continue a test driven approach while enhancing the structure, descriptive nature and dynamic pattern of the source code.
+
 # Run project
 - clone project
 - assuming you have bundler installed, run `bundle install` from root directory of project
@@ -26,6 +29,10 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - 'Piece' could inherit from 'Square'
 - Re-factor method for placing pieces now that calculation for coordinates exists
 - pawn should not be able to move diagonally, if opposing is not located in that position
+- make `add_piece` and `remove_piece` private methods, per instructions above
+- remove excessive `if` `else` statements and create new methods for logic
+- add tests and logic for entering a destination that is off the board
+- make code descriptive enough where notes would not be (or very minimally) needed
 
 # Results
 - Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:

@@ -53,10 +53,10 @@ describe "Board" do
             expect(@board.move("c4", "d3")).to eq(0)
           end
 
-          # it "should not be able to move diagonally left" do
-          #   expect(@board.move("c4", "d3")).to eq("invalid move")
-          #   expect(@board.current_position).to eq([3,4])
-          # end
+          it "should not be able to move diagonally left" do
+            @board.remove_piece("b3")
+            expect(@board.move("c4", "b3")).to eq(0)
+          end
         end
 
         describe "white piece is located at new position" do
@@ -70,32 +70,29 @@ describe "Board" do
             expect(@board.move("c4", "d3")).to eq([4, 3])
           end
 
-          # it "should not be able to move forward" do
-          #   Piece.new("pawn", "black", "c3")
-          #   @board.move("c3")
-          #   expect(@board.current_position).to eq([3,4])
-          # end
+          it "should not be able to move forward" do
+            @board.add_piece("pawn", "white", "c3")
+            expect(@board.move("c4", "c3")).to eq(0)
+          end
         end
 
-        # describe "black piece is located at new position" do
-        #   it "should not be able to move diagonally left" do
-        #     Piece.new("pawn", "black", "d3")
-        #     expect(@board.move("d3")).to eq("invalid move")
-        #     expect(@board.current_position).to eq([3,4])
-        #   end
+        describe "black piece is located at new position" do
+          it "should not be able to move diagonally left" do
+            @board.add_piece("pawn", "black", "d3")
+            expect(@board.move("c4", "d3")).to eq(0)
+          end
 
-        #   it "should not be able to move diagonally right" do
-        #     Piece.new("pawn", "black", "d3")
-        #     expect(@board.move("d3")).to eq("invalid move")
-        #     expect(@board.current_position).to eq([3,4])
-        #   end
+          it "should not be able to move diagonally right" do
+            @board.add_piece("pawn", "black", "d3")
+            expect(@board.move("c4", "d3")).to eq(0)
+          end
 
-        #   it "should not be able to move forward" do
-        #     Piece.new("pawn", "black", "c3")
-        #     @board.move("c3")
-        #     expect(@board.current_position).to eq([3,4])
-        #   end
-        # end
+          it "should not be able to move forward" do
+            @board.add_piece("pawn", "black", "c3")
+            @board.move("c4", "c3")
+            expect(@board.move("c4", "c3")).to eq(0)
+          end
+        end
       end
 
       describe "#find_list_position" do

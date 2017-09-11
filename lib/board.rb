@@ -45,16 +45,26 @@ class Board
       piece.current_position
     # diagonal right
     elsif (difference == [1, -1]) && piece_at_index?(new_index)
-      update_piece_coordinates(piece, difference)
-      update_squares_pieces(piece, previous_index, new_index)
-      piece.current_position
+      piece_2 = piece_at_index(new_index)
+      if piece_2.color != piece.color
+        update_piece_coordinates(piece, difference)
+        update_squares_pieces(piece, previous_index, new_index)
+        piece.current_position
+      else
+        return 0
+      end
     # diagonal left
     elsif (difference == [-1, -1]) && piece_at_index?(new_index)
-      update_piece_coordinates(piece, difference)
-      update_squares_pieces(piece, previous_index, new_index)
-      piece.current_position
+      piece_2 = piece_at_index(new_index)
+      if piece_2.color != piece.color
+        update_piece_coordinates(piece, difference)
+        update_squares_pieces(piece, previous_index, new_index)
+        piece.current_position
+      else
+        return 0
+      end
     else
-      puts "invalid move"
+      # puts "invalid move"
       return 0
     end
   end
@@ -156,8 +166,16 @@ class Board
   def piece_at_index?(new_index)
     if @squares[new_index].piece.nil?
       return false
-    elsif @squares[new_index].piece.color == "white"
+    else
       return true
+    end
+  end
+
+  def piece_at_index(new_index)
+    if @squares[new_index].piece.nil?
+      return false
+    else
+      return @squares[new_index].piece
     end
   end
 
