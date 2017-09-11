@@ -21,19 +21,16 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - convert position to something that can be represented on x & y coordinates
 - add ability for pawn to move
   - [x, y] = [column, row]
+  - black: move forward [x, y] + [0, -1]
+  - black: move diagonally
+    - condition: if there is a piece in diagonal position
+    - diagonal left: [x, y] + [-1, -1]
+    - diagonal right: [x, y] + [1, -1]
   - white: move forward [x, y] + [0, 1]
   - white: move diagonally
     - condition: if there is a piece in diagonal position
     - diagonal left: [x, y] + [-1, 1]
     - diagonal right: [x, y] + [1, 1]
-
-  - [x, y] = [column, row]
-  - black: move forward [x, y] + [0, -1]
-  - black: move diagonally
-    - condition: if there is a piece in diagonal position
-    - diagonal left: [x, y] + [-1, -1]
-    - diagonal right: [x, y] + [-1, 1]
-
   - cannot move back or horizontally
   - cannot move forward if piece is in that position
 
@@ -49,19 +46,18 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - To move a piece: call `move` on an instance of `Board` and pass in the current board position of the piece (eg 'c4') and the new preferred board position (eg 'c3').
 
 # To-do
-- finish implementing logic described in `main.rb`
-- create and implement logic for moving king
-- 'Piece' could inherit from 'Square'
-- Re-factor method for placing pieces now that calculation for coordinates exists
-- pawn should not be able to move diagonally, if opposing is not located in that position
-- make `add_piece` and `remove_piece` private methods, per instructions above
+- finish implementing logic described in "Initial Steps"
+- add logic for white pawn, black king and white king
+- re-factor method for placing pieces now that a method for calculating the list location from given coordinates exists. (See `find_list_position`)
 - remove excessive `if` `else` statements and create new methods for logic
 - add tests for entering a destination that is off the board (logic already exists)
 - make code descriptive enough where notes would not be (or very minimally) needed
-- add logic for white pawn, black kind and white king.
+- make `add_piece` and `remove_piece` private methods, per instructions above
+- Thoughts: 'Piece' could inherit from 'Square'
 
 # Results
 - Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:
-<img width="927" alt="run_main" src="https://user-images.githubusercontent.com/7623147/30287262-43fec116-96d9-11e7-9e13-26102ad6d42f.png">
+<img width="949" alt="run_main" src="https://user-images.githubusercontent.com/7623147/30297335-51bdd788-96fc-11e7-9ee0-bb0039fe09a4.png">
+
 
 
