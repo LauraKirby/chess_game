@@ -28,7 +28,16 @@ describe "Board" do
       it "adds a piece to the board" do
         @board.add_piece("pawn", "black", "c3")
         piece_index = @board.send(:find_list_position, "c3")
-        expect(@board.squares[piece_index].class == Piece)
+        expect(@board.squares[piece_index].piece.class).to eq(Piece)
+      end
+    end
+
+    describe "#remove_piece" do
+      it "should take the board location and set the square's piece attribute to nil" do
+        @board.add_piece("pawn", "white", "b3")
+        @board.remove_piece("b3")
+        piece_index = @board.send(:find_list_position, "b3")
+        expect(@board.squares[piece_index].piece.nil?).to eq(true)
       end
     end
 
@@ -39,10 +48,10 @@ describe "Board" do
             expect(@board.move("c4", "c3")).to eq([3, 3])
           end
 
-          # it "should not be able to move diagonally right" do
-          #   expect(@board.move("c4", "d3")).to eq("invalid move")
-          #   expect(@board.current_position).to eq([3,4])
-          # end
+          it "should not be able to move diagonally right" do
+            @board.remove_piece("d3")
+            expect(@board.move("c4", "d3")).to eq(0)
+          end
 
           # it "should not be able to move diagonally left" do
           #   expect(@board.move("c4", "d3")).to eq("invalid move")

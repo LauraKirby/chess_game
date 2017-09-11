@@ -13,6 +13,11 @@ class Board
     @squares[piece_index].piece = Piece.new(piece, color, board_location)
   end
 
+  def remove_piece(board_location)
+    piece_index = find_list_position(board_location)
+    @squares[piece_index].piece = nil
+  end
+
   def move(previous_board_location, new_board_location)
     # piece = nil
     previous_index = find_list_position(previous_board_location)
