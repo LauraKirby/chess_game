@@ -37,9 +37,7 @@ class Board
 
     # black pawn
     # forward
-    # puts "piece_at_index?(new_index) #{piece_at_index?(new_index)}, new index #{new_index}"
     if (difference == [0, -1]) && !piece_at_index?(new_index)
-      # puts "piece_at_index?(new_index) #{piece_at_index?(new_index)}"
       update_piece_coordinates(piece, difference)
       update_squares_pieces(piece, previous_index, new_index)
       piece.current_position
@@ -72,7 +70,7 @@ class Board
   def print_board
     count = 0
     @squares.each do |square|
-      square.piece.nil? ? local_piece = "e" : local_piece = square.piece.piece_name
+      square.piece.nil? ? local_piece = " e " : local_piece = "#{square.piece.piece_name[0]}/#{square.piece.color[0]}"
       puts "\n \n"  if count % 8 == 0
       print " #{square.coordinates} : #{local_piece} --"
       count += 1
@@ -137,12 +135,11 @@ class Board
     previous_board_location = piece.current_position
     new_location = [(difference[0] + previous_board_location[0]), (difference[1] + previous_board_location[1] )]
     piece.current_position = new_location
-    new_location
   end
 
   def update_squares_pieces(piece, new_index, previous_index)
-    @squares[previous_index].piece = nil
-    @squares[new_index].piece = piece
+    @squares[new_index].piece = nil
+    @squares[previous_index].piece = piece
   end
 
   # could first sort list of pieces that way we don't have to iterate over the

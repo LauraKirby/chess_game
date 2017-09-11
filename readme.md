@@ -15,6 +15,28 @@ Please don’t spend more than a couple hours on this. If there are features or 
 # Approach
 - Given the time constraints, I aimed to make problem (listed above) smaller by first solving for the "black pawn" located at "c4". While solving for the "black pawn" first, moved quickly with well tested code. As I begin working on other pieces, I will aim to continue a test driven approach while enhancing the structure, descriptive nature and dynamic pattern of the source code.
 
+## Initial Steps
+- read file
+- create Pieces
+- convert position to something that can be represented on x & y coordinates
+- add ability for pawn to move
+  - [x, y] = [column, row]
+  - white: move forward [x, y] + [0, 1]
+  - white: move diagonally
+    - condition: if there is a piece in diagonal position
+    - diagonal left: [x, y] + [-1, 1]
+    - diagonal right: [x, y] + [1, 1]
+
+  - [x, y] = [column, row]
+  - black: move forward [x, y] + [0, -1]
+  - black: move diagonally
+    - condition: if there is a piece in diagonal position
+    - diagonal left: [x, y] + [-1, -1]
+    - diagonal right: [x, y] + [-1, 1]
+
+  - cannot move back or horizontally
+  - cannot move forward if piece is in that position
+
 # Run project
 - clone project
 - assuming you have bundler installed, run `bundle install` from root directory of project
@@ -22,6 +44,9 @@ Please don’t spend more than a couple hours on this. If there are features or 
   - You can run the code without bundler but you may not be able to run the tests.
 - run program: `ruby ./main.rb`
 - see `Spec` directory for tests
+
+# Move
+- To move a piece: call `move` on an instance of `Board` and pass in the current board position of the piece (eg 'c4') and the new preferred board position (eg 'c3').
 
 # To-do
 - finish implementing logic described in `main.rb`
@@ -31,10 +56,12 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - pawn should not be able to move diagonally, if opposing is not located in that position
 - make `add_piece` and `remove_piece` private methods, per instructions above
 - remove excessive `if` `else` statements and create new methods for logic
-- add tests and logic for entering a destination that is off the board
+- add tests for entering a destination that is off the board (logic already exists)
 - make code descriptive enough where notes would not be (or very minimally) needed
+- add logic for white pawn, black kind and white king.
 
 # Results
 - Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:
 <img width="927" alt="run_main" src="https://user-images.githubusercontent.com/7623147/30287262-43fec116-96d9-11e7-9e13-26102ad6d42f.png">
+
 

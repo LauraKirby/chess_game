@@ -1,25 +1,3 @@
-# read file
-# create Pieces
-# convert position to something that can be represented on x & y coordinates
-# add ability for pawn to move
-  # [x, y] = [column, row]
-  # white: move forward [x, y] + [0, 1]
-  # white: move diagonally
-    # condition: if there is a piece in diagonal position
-    # diagonal left: [x, y] + [-1, 1]
-    # diagonal right: [x, y] + [1, 1]
-
-  # [x, y] = [column, row]
-  # black: move forward [x, y] + [0, -1]
-  # black: move diagonally
-    # condition: if there is a piece in diagonal position
-    # diagonal left: [x, y] + [-1, -1]
-    # diagonal right: [x, y] + [-1, 1]
-
-  # cannot move back or horizontally
-  # cannot move forward if piece is in that position
-
-# add ability for king to move
 require_relative "./lib/piece.rb"
 require_relative "./lib/board.rb"
 require_relative "./lib/square.rb"
@@ -30,17 +8,15 @@ board = Board.new(pieces)
 board.print_board
 
 black_pawn = board.squares[34].piece
-puts "\n\npiece: #{black_pawn.piece_name}, current position: #{black_pawn.current_position}"
+puts "\n\nbefore move, piece: #{black_pawn.piece_name}, current position: #{black_pawn.current_position}"
+puts "board.move('c4,'c3')"
+board.move('c4','c3')
+puts "after move, piece:  #{black_pawn.piece_name}, current position: #{black_pawn.current_position}\n\n"
 
-# To move a piece:
-#   enter the current board position (eg 'c4')
-#   and the new preferred board position (eg 'c3')
-
-puts "\nboard.move('c4','c3')"
-
-board.move("c4","c3")
-
-puts "\npiece:  #{black_pawn.piece_name}, current position: #{black_pawn.current_position}\n"
-
+black_pawn_a4 = board.squares[32].piece
+puts "before move, piece:  #{black_pawn_a4.piece_name}, current position: #{black_pawn_a4.current_position}\n"
+puts "board.move('a4','i3')"
+board.move('a4','i3')
+puts "after move, piece:  #{black_pawn_a4.piece_name}, current position: #{black_pawn_a4.current_position}\n"
 
 board.print_board

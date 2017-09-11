@@ -134,8 +134,8 @@ describe "Board" do
           new_index = 41
 
           @board.send(:update_squares_pieces, black_pawn, new_index, previous_index)
-          expect(@board.squares[previous_index].piece).to eq nil
-          expect(@board.squares[new_index].piece.class).to eq Piece
+          expect(@board.squares[new_index].piece).to eq nil
+          expect(@board.squares[previous_index].piece.class).to eq Piece
         end
       end
 
