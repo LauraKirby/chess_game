@@ -32,8 +32,9 @@ board.print_board
 black_pawn = board.squares[34].piece
 puts "\n \npiece: #{black_pawn.piece_name}, #{black_pawn.current_position}"
 
+# current position and new position
 board.move("c4","c3")
 puts "\nafter move - \npiece:  #{black_pawn.piece_name}, #{black_pawn.current_position}\n"
 
-# current position and new position
-board.move("c4", "c3")
+
+board.print_board

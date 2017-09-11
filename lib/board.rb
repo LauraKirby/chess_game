@@ -35,6 +35,102 @@ class Board
     place_pieces(@pieces)
   end
 
+  def print_board
+    count = 0
+    @squares.each do |square|
+      square.piece.nil? ? local_piece = "e" : local_piece = square.piece.piece_name
+      puts "\n \n"  if count % 8 == 0
+      print " #{square.coordinates} : #{local_piece} --"
+      count += 1
+    end
+  end
+
+  def move(starting_location, ending_location)
+    # piece = nil
+    old_list_position = find_list_position(starting_location)
+    new_list_position = find_list_position(ending_location)
+    piece_new_coordinates = parse_position(starting_location)
+
+    piece = @squares[old_list_position].piece
+
+    # return 0 if piece == nil
+    if piece == nil
+      puts "no piece located at #{starting_location}"
+      return 0
+    end
+    # find_distance(piece, ending_location)
+    difference = find_distance(starting_location, ending_location)
+
+    # black pawn
+    # forward
+    if difference == [0, -1]
+      update_piece_coordinates(piece, difference)
+      # update_squares_pieces(piece, piece_new_coordinates)
+      piece.current_position
+    # diagonal right
+    elsif difference == [1, -1]
+      update_piece_coordinates(piece, difference)
+      # update_squares_pieces(piece, piece_new_coordinates)
+      piece.current_position
+    # diagonal left
+    elsif difference == [-1, -1]
+      update_piece_coordinates(piece, difference)
+      # update_squares_pieces(piece, piece_new_coordinates)
+      piece.current_position
+    else
+      puts "invalid move"
+      return 0
+    end
+  end
+
+# will be private, removed keyword for quick testing
+
+  def update_board()
+  end
+
+
+  def find_list_position(coordinates)
+    if coordinates.class == String
+      coordinates = parse_position(coordinates)
+      loc = 63 - (8 * coordinates[1]) + coordinates[0]
+    elsif coordinates.class == Array
+      loc = 63 - (8 * coordinates[1]) + coordinates[0]
+    else
+      return 0
+    end
+    loc
+  end
+
+  def parse_position(pos)
+    position = pos.split("")
+    @row = position[1].to_i
+    @column = position[0].ord - 96
+    [@column, @row]
+  end
+
+  def find_distance(starting_location, ending_location)
+    starting_location = parse_position(starting_location)
+    ending_location = parse_position(ending_location)
+    distance = [(  ending_location[0] - starting_location[0] ), ( ending_location[1] - starting_location[1])]
+    distance
+  end
+
+  def update_piece_coordinates(piece, difference)
+    starting_location = piece.current_position
+    new_location = [(difference[0] + starting_location[0]), (difference[1] + starting_location[1] )]
+    piece.current_position = new_location
+    new_location
+  end
+
+  def update_squares_pieces(piece, piece_new_coordinates)
+    new_list_position = find_list_position(piece_new_coordinates)
+    old_list_position = find_list_position(piece.current_position)
+    piece.current_position = piece_new_coordinates
+
+    @squares[old_list_position].piece = nil
+    @squares[new_list_position].piece = piece
+  end
+
   # could first sort list of pieces that way we don't have to iterate over the
   # entire board each item an piece is placed
   def place_pieces(pieces)
@@ -53,66 +149,4 @@ class Board
     pieces
   end
 
-  def print_board
-    count = 0
-    @squares.each do |square|
-      square.piece.nil? ? local_piece = "e" : local_piece = square.piece.piece_name
-      puts "\n \n"  if count % 8 == 0
-      print " #{square.coordinates} : #{local_piece} --"
-      count += 1
-    end
-  end
-
-  def move(starting_location, ending_location)
-    piece = nil
-    start = parse_position(starting_location)
-
-    @squares.each do |square|
-      if !square.piece.nil? && square.piece.current_position == start
-        piece = square.piece
-      end
-    end
-
-    return 0 if piece == nil
-
-    difference = find_distance(piece, ending_location)
-    # black pawn
-    # forward
-    if difference == [0, 1]
-      set_location(piece, difference)
-    # diagonal right
-    elsif difference == [-1, 1]
-      set_location(piece, difference)
-    # diagonal right
-    elsif difference == [1, 1]
-      set_location(piece, difference)
-    else
-      puts "invalid move"
-      return 0
-    end
-  end
-
-  private
-
-  def parse_position(pos)
-    position = pos.split("")
-    @row = position[1].to_i
-    @column = position[0].ord - 96
-    [@column, @row]
-  end
-
-  def find_distance(piece, new_location)
-    starting_location = piece.current_position
-    ending_location = parse_position(new_location)
-    distance = [( starting_location[0] - ending_location[0] ), ( starting_location[1] - ending_location[1] )]
-    distance
-  end
-
-  def set_location(piece, difference)
-    starting_location = piece.current_position
-    new_location = [ ( starting_location[0] - difference[0] ), ( starting_location[1] - difference[1] )]
-    piece.current_position = new_location
-  end
-
 end
-
