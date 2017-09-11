@@ -25,7 +25,7 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - create and implement logic for moving king
 - 'Piece' could inherit from 'Square'
 - Re-factor method for placing pieces now that calculation for coordinates exists
-- update tests to test private methods
+- pawn should not be able to move diagonally, if opposing is not located in that position
 
 # Results
 - Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:

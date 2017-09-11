@@ -83,7 +83,7 @@ class Board
     end
   end
 
-  # from here down will be private, removed keyword for quick testing
+  private
 
   def find_list_position(coordinates)
     if coordinates.class == String

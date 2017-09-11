@@ -30,11 +30,17 @@ board = Board.new(pieces)
 board.print_board
 
 black_pawn = board.squares[34].piece
-puts "\n \npiece: #{black_pawn.piece_name}, #{black_pawn.current_position}"
+puts "\n\npiece: #{black_pawn.piece_name}, current position: #{black_pawn.current_position}"
 
-# current position and new position
+# To move a piece:
+#   enter the current board position (eg 'c4')
+#   and the new preferred board position (eg 'c3')
+
+puts "\nboard.move('c4','c3')"
+
 board.move("c4","c3")
-puts "\nafter move - \npiece:  #{black_pawn.piece_name}, #{black_pawn.current_position}\n"
+
+puts "\npiece:  #{black_pawn.piece_name}, current position: #{black_pawn.current_position}\n"
 
 
 board.print_board

@@ -81,23 +81,23 @@ describe "Board" do
 
       describe "#find_list_position" do
         it "should take a set of coordinates as user input string and return the location in the @squares array " do
-          expect(@board.find_list_position("c4")).to eq(34)
+          expect(@board.send(:find_list_position, "c4")).to eq(34)
         end
 
         it "should take a set of coordinates as an array and return the location in the @squares array " do
-          expect(@board.find_list_position([3,4])).to eq(34)
+          expect(@board.send(:find_list_position, [3,4])).to eq(34)
         end
       end
 
       describe "#parse_position" do
         it "should take the user's input, such at 'c4' and return the corresponding coordinates" do
-          expect(@board.parse_position("c4")).to eq([3,4])
+          expect(@board.send(:parse_position, "c4")).to eq([3,4])
         end
       end
 
       describe "#find_distance(piece, new_location)" do
         it "should take two values and return the distance is the form of coordinates (ie [x,y])" do
-          expect(@board.find_distance("c4", "b3")).to eq([-1,-1])
+          expect(@board.send(:find_distance, "c4", "b3")).to eq([-1,-1])
         end
       end
 
@@ -105,7 +105,7 @@ describe "Board" do
         it "should update the 'current_position' on a piece and the corresponding previous position of on the board and the new position on the board" do
           black_pawn = @board.squares[34].piece
           difference = [-1,-1]
-          expect(@board.update_piece_coordinates(black_pawn, difference)).to eq([2,3])
+          expect(@board.send(:update_piece_coordinates, black_pawn, difference)).to eq([2,3])
         end
       end
 
@@ -115,7 +115,7 @@ describe "Board" do
           piece_new_coordinates = [2,3]
           old_piece_coordinates = [3,4]
 
-          @board.update_squares_pieces(black_pawn, piece_new_coordinates, old_piece_coordinates)
+          @board.send(:update_squares_pieces, black_pawn, piece_new_coordinates, old_piece_coordinates)
           expect(@board.squares[34].piece).to eq nil
           expect(@board.squares[41].piece.class).to eq Piece
         end
