@@ -28,5 +28,6 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - update tests to test private methods
 
 # Results
-- Running the program and tests should result in the following:
-<img width="885" alt="print_chess_game" src="https://user-images.githubusercontent.com/7623147/30262294-3a178380-9685-11e7-8743-1962d13f53b4.png">
+- Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:
+<img width="927" alt="run_main" src="https://user-images.githubusercontent.com/7623147/30287262-43fec116-96d9-11e7-9e13-26102ad6d42f.png">
+
