@@ -48,8 +48,8 @@ class Board
   def move(starting_location, ending_location)
     # piece = nil
     old_list_position = find_list_position(starting_location)
-    new_list_position = find_list_position(ending_location)
-    piece_new_coordinates = parse_position(starting_location)
+    piece_new_coordinates = parse_position(ending_location)
+    piece_old_coordinates = parse_position(starting_location)
 
     piece = @squares[old_list_position].piece
 
@@ -58,24 +58,24 @@ class Board
       puts "no piece located at #{starting_location}"
       return 0
     end
-    # find_distance(piece, ending_location)
+
     difference = find_distance(starting_location, ending_location)
 
     # black pawn
     # forward
     if difference == [0, -1]
       update_piece_coordinates(piece, difference)
-      # update_squares_pieces(piece, piece_new_coordinates)
+      update_squares_pieces(piece, piece_new_coordinates, piece_old_coordinates)
       piece.current_position
     # diagonal right
     elsif difference == [1, -1]
       update_piece_coordinates(piece, difference)
-      # update_squares_pieces(piece, piece_new_coordinates)
+      update_squares_pieces(piece, piece_new_coordinates, piece_old_coordinates)
       piece.current_position
     # diagonal left
     elsif difference == [-1, -1]
       update_piece_coordinates(piece, difference)
-      # update_squares_pieces(piece, piece_new_coordinates)
+      update_squares_pieces(piece, piece_new_coordinates, piece_old_coordinates)
       piece.current_position
     else
       puts "invalid move"
@@ -83,11 +83,7 @@ class Board
     end
   end
 
-# will be private, removed keyword for quick testing
-
-  def update_board()
-  end
-
+  # from here down will be private, removed keyword for quick testing
 
   def find_list_position(coordinates)
     if coordinates.class == String
@@ -122,11 +118,9 @@ class Board
     new_location
   end
 
-  def update_squares_pieces(piece, piece_new_coordinates)
+  def update_squares_pieces(piece, piece_new_coordinates, piece_old_coordinates)
     new_list_position = find_list_position(piece_new_coordinates)
-    old_list_position = find_list_position(piece.current_position)
-    piece.current_position = piece_new_coordinates
-
+    old_list_position = find_list_position(piece_old_coordinates)
     @squares[old_list_position].piece = nil
     @squares[new_list_position].piece = piece
   end

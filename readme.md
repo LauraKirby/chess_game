@@ -21,10 +21,8 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - see `Spec` directory for tests
 
 # To-do
-- update board after pawn is moved
 - finish implementing logic described in `main.rb`
 - create and implement logic for moving king
 - 'Piece' could inherit from 'Square'
 - Re-factor method for placing pieces now that calculation for coordinates exists
-- resolve bug in `update_squares_pieces` method
 - update tests to test private methods

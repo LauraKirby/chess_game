@@ -113,10 +113,11 @@ describe "Board" do
         it "should update the previous square 'piece' value and the new square 'piece' value" do
           black_pawn = @board.squares[34].piece
           piece_new_coordinates = [2,3]
-          @board.update_squares_pieces(black_pawn, piece_new_coordinates)
+          old_piece_coordinates = [3,4]
+
+          @board.update_squares_pieces(black_pawn, piece_new_coordinates, old_piece_coordinates)
           expect(@board.squares[34].piece).to eq nil
-          expect(@board.squares[41].piece.current_position).to eq [2,3]
-          # expect(@board.squares[41].piece.current_position).to eq [2,3]
+          expect(@board.squares[41].piece.class).to eq Piece
         end
       end
 
