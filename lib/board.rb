@@ -142,8 +142,8 @@ class Board
     @squares[previous_index].piece = piece
   end
 
-  # could first sort list of pieces that way we don't have to iterate over the
-  # entire board each item an piece is placed
+  # to do: make more efficient by looking up
+  # piece locations with: 8 * (8-y) + (x-1)
   def place_pieces(pieces)
     return [] if pieces.nil?
     pieces.each do |piece|

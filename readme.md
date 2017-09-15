@@ -56,8 +56,36 @@ Please don’t spend more than a couple hours on this. If there are features or 
 - Thoughts: 'Piece' could inherit from 'Square'
 
 # Results
-- Running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:
+- running the program with `ruby main.rb` and the tests with `bundle exec rspec` should result in the following:
 <img width="949" alt="run_main" src="https://user-images.githubusercontent.com/7623147/30297335-51bdd788-96fc-11e7-9ee0-bb0039fe09a4.png">
 
+# Discussion
+#### How do you handle the case of someone trying to move a king into check?
+  - how to tell if a king is about to be in check?
+  - if a king is in check, what are the available moves?
 
+#### Example, a king is about to move into check.
+Setup: [black, pawn, c5], [white, king, d4]
 
+- black pawn move to c4
+  - for squares located at diagonal left and diagonal right
+    - if white king is in diagonal left or diagonal right
+      - print "check"
+    - else
+      - add white king to a property called `invalid pieces`
+- after successful move
+  - remove invalid pieces that were placed on squares by black pawn based on the previous location of black pawn
+
+- prepare to move, remove invalid pieces that were placed by white king, from surrounding squares
+  - white king move to d3
+    - for surrounding squares
+      if black king is
+    - if the square located at d3 contains white king in the `invalid pieces` list
+      - return "invalid move, king would be in check"
+- after successful move
+  - remove invalid pieces that were placed on squares by white king based on the previous location of white king
+
+#### Additional edge case:
+- track turns to ensure one person doesn't move twice
+- piece should be able to kill another piece
+- after a king is killed, game should end
