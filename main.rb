@@ -1,9 +1,12 @@
+require_relative "./lib/game.rb"
 require_relative "./lib/piece.rb"
 require_relative "./lib/board.rb"
 require_relative "./lib/square.rb"
 
-pieces = "input_file.csv"
-board = Board.new(pieces)
+setup = "input_file.csv"
+
+game = Game.new(setup)
+board = game.board
 
 board.print_board
 

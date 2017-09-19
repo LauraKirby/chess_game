@@ -1,6 +1,6 @@
-require_relative "./board"
+require_relative "./game"
 
-class Piece < Board
+class Piece < Game
   attr_accessor :piece_name, :current_position, :color
 
   def initialize(piece_name, color, position)

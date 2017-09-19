@@ -1,6 +1,8 @@
 require 'csv'
+require_relative './game'
 
-class Board
+class Board < Game
+
   attr_accessor :squares, :pieces, :piece
 
   def initialize(input=nil)
@@ -16,6 +18,16 @@ class Board
   def remove_piece(board_location)
     piece_index = find_list_position(board_location)
     @squares[piece_index].piece = nil
+  end
+
+  def print_board
+    count = 0
+    @squares.each do |square|
+      square.piece.nil? ? local_piece = " e " : local_piece = "#{square.piece.piece_name[0]}/#{square.piece.color[0]}"
+      puts "\n \n"  if count % 8 == 0
+      print " #{square.coordinates} : #{local_piece} --"
+      count += 1
+    end
   end
 
   def move(previous_board_location, new_board_location)
@@ -67,16 +79,6 @@ class Board
     end
   end
 
-  def print_board
-    count = 0
-    @squares.each do |square|
-      square.piece.nil? ? local_piece = " e " : local_piece = "#{square.piece.piece_name[0]}/#{square.piece.color[0]}"
-      puts "\n \n"  if count % 8 == 0
-      print " #{square.coordinates} : #{local_piece} --"
-      count += 1
-    end
-  end
-
   private
 
   def create_board
@@ -87,59 +89,6 @@ class Board
       end
     end
     new_board
-  end
-
-
-  def parse_input(input)
-    @pieces = []
-    return @pieces if input.nil?
-
-    positions = []
-    CSV.foreach(input) do |row|
-      row.each {|item| item.strip! }
-      positions.push(row)
-    end
-
-    positions.each do |piece|
-      @pieces.push( Piece.new(piece[0], piece[1], piece[2]) )
-    end
-
-    place_pieces(@pieces)
-  end
-
-  def find_list_position(coordinates)
-    if coordinates.class == String
-      coordinates = parse_position(coordinates)
-      loc = 63 - (8 * coordinates[1]) + coordinates[0]
-    elsif coordinates.class == Array
-      loc = 63 - (8 * coordinates[1]) + coordinates[0]
-    else
-      return 0
-    end
-    loc
-  end
-
-  def parse_position(pos)
-    position = pos.split("")
-    @row = position[1].to_i
-    @column = position[0].ord - 96
-    [@column, @row]
-  end
-
-  def find_distance(previous_board_location, new_board_location)
-    distance = [(  new_board_location[0] - previous_board_location[0] ), ( new_board_location[1] - previous_board_location[1])]
-    distance
-  end
-
-  def update_piece_coordinates(piece, difference)
-    previous_board_location = piece.current_position
-    new_location = [(difference[0] + previous_board_location[0]), (difference[1] + previous_board_location[1] )]
-    piece.current_position = new_location
-  end
-
-  def update_squares_pieces(piece, new_index, previous_index)
-    @squares[new_index].piece = nil
-    @squares[previous_index].piece = piece
   end
 
   # to do: make more efficient by looking up
@@ -158,22 +107,6 @@ class Board
       end
     end
     pieces
-  end
-
-  def piece_at_index?(new_index)
-    if @squares[new_index].piece.nil?
-      return false
-    else
-      return true
-    end
-  end
-
-  def piece_at_index(new_index)
-    if @squares[new_index].piece.nil?
-      return false
-    else
-      return @squares[new_index].piece
-    end
   end
 
 end
