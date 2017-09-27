@@ -1,3 +1,7 @@
+# add constants for strings
+# create error messages
+# create unique methods (eg valid moves) within subclass
+# make class for each piece, each piece will then have its own "valid move method"
 require '_spec_helper'
 require 'csv'
 

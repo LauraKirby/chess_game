@@ -47,6 +47,8 @@ class Board < Game
 
     difference = find_distance(previous_coordinates, new_coordinates)
 
+    # To do: create unique move validations within the Pawn class
+    # piece.move
     # black pawn
     # forward
     if (difference == [0, -1]) && !piece_at_index?(new_index)
